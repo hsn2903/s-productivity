@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { TaskItem } from "../components";
 
 const TasksPage = () => {
   const [task, setTask] = useState({ taskName: "", numOfPomodoro: "" });
@@ -21,6 +21,11 @@ const TasksPage = () => {
 
     setTasksList([...tasksList, task]);
     setTask({ taskName: "", numOfPomodoro: "" });
+  };
+
+  const handleRemove = (id) => {
+    const newTasks = tasksList.filter((t) => t.id !== id);
+    setTasksList(newTasks);
   };
 
   return (
@@ -55,20 +60,7 @@ const TasksPage = () => {
         <h1 className="text-xl font-bold text-slate-700">Tasks List</h1>
         {tasksList.map((item) => {
           const { id, taskName, numOfPomodoro } = item;
-          return (
-            <div className="flex justify-between items-center" key={id}>
-              <p>{taskName}</p>
-              <p>{numOfPomodoro}</p>
-              <div className="flex gap-2 text-slate-600 text-sm">
-                <button>
-                  <FaEdit />
-                </button>
-                <button>
-                  <FaTrash />
-                </button>
-              </div>
-            </div>
-          );
+          return <TaskItem key={id} {...item} onRemove={handleRemove} />;
         })}
       </div>
     </main>
