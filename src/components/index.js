@@ -1,3 +1,4 @@
 import TaskItem from "./tasks/TaskItem";
+import Navbar from "./navbar/Navbar";
 
-export { TaskItem };
+export { Navbar, TaskItem };
