@@ -1,19 +1,6 @@
 import React, { useReducer, useState } from "react";
 import { Alert, TaskItem } from "../components";
-
-const reducer = (state, action) => {
-  if (action.type === "ADD_TASK") {
-    const newTasks = [...state.tasks, action.payload];
-    return { ...state, tasks: newTasks, showAlert: true };
-  }
-
-  if (action.type === "REMOVE_TASK") {
-    const newTasks = state.tasks.filter((t) => t.id !== action.payload);
-    return { ...state, tasks: newTasks };
-  }
-
-  throw new Error("no matching action type");
-};
+import { reducer } from "../reducer/taskReducer";
 
 const initialArg = {
   tasks: [],
@@ -56,12 +43,22 @@ const TasksPage = () => {
     dispatch({ type: "REMOVE_TASK", payload: id });
   };
 
+  const clearAlert = () => {
+    dispatch({ type: "CLEAR_ALERT" });
+  };
+
   return (
     <main className="container mx-auto mt-24">
       <div className="w-1/2 flex flex-col gap-2">
         <h1 className="font-bold text-center text-2xl">New Task</h1>
 
-        {state.showAlert && <Alert />}
+        {state.showAlert && (
+          <Alert
+            clearAlert={clearAlert}
+            alertText={state.alertText}
+            alertType={state.alertType}
+          />
+        )}
         <form action="" onSubmit={handleSubmit} className="flex flex-col gap-3">
           <input
             type="text"

@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 
-const Alert = ({ alertType, alertText }) => {
+const Alert = ({ alertType, alertText, clearAlert }) => {
+  useEffect(() => {
+    setTimeout(() => {
+      clearAlert();
+    }, 3000);
+  });
+
   return (
     <div>
       {alertType === "info" && (
