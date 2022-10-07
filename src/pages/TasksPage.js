@@ -28,12 +28,9 @@ const TasksPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!task.taskName) {
-      // show alert
-    }
-
     dispatch({ type: "ADD_TASK", payload: task });
 
+    // clear inputs
     setTask({ taskName: "", numOfPomodoro: "", done: false });
   };
 
