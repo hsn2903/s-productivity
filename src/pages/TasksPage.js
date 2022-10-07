@@ -1,9 +1,22 @@
 import React, { useState } from "react";
 import { Alert, TaskItem } from "../components";
 
+const initialTasks = [
+  { id: 0, taskName: "p: new topic", numOfPomodoro: 4, isDone: true },
+  { id: 1, taskName: "p: project", numOfPomodoro: 4, isDone: false },
+  { id: 2, taskName: "p: repeat", numOfPomodoro: 2, isDone: false },
+];
+let nextId = 3;
+
 const TasksPage = () => {
-  const [task, setTask] = useState({ taskName: "", numOfPomodoro: "" });
-  const [tasksList, setTasksList] = useState([]);
+  const [task, setTask] = useState({
+    taskName: "",
+    numOfPomodoro: "",
+    isDone: false,
+  });
+  const [tasksList, setTasksList] = useState(initialTasks);
+
+  // const [state, dispatch] = useReducer(reducer, initialArg, init?);
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -20,7 +33,7 @@ const TasksPage = () => {
     }
 
     setTasksList([...tasksList, task]);
-    setTask({ taskName: "", numOfPomodoro: "" });
+    setTask({ taskName: "", numOfPomodoro: "", done: false });
   };
 
   const handleRemove = (id) => {
