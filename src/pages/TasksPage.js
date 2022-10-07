@@ -40,14 +40,18 @@ const TasksPage = () => {
     dispatch({ type: "REMOVE_TASK", payload: id });
   };
 
+  const handleEdit = (id) => {};
+
   const clearAlert = () => {
     dispatch({ type: "CLEAR_ALERT" });
   };
 
   return (
     <main className="container mx-auto mt-24">
-      <div className="w-1/2 flex flex-col gap-2">
-        <h1 className="font-bold text-center text-2xl">New Task</h1>
+      <div className="w-[350px] flex flex-col gap-2 border border-slate-700 p-6 rounded-md">
+        <h1 className="font-bold text-center text-xl text-slate-400">
+          New Task
+        </h1>
 
         {state.showAlert && (
           <Alert
@@ -59,7 +63,7 @@ const TasksPage = () => {
         <form action="" onSubmit={handleSubmit} className="flex flex-col gap-3">
           <input
             type="text"
-            className="border border-1 border-blue-300 rounded-md px-4"
+            className="border border-1 border-blue-300 rounded-md px-4 py-1"
             name="taskName"
             placeholder="task name"
             value={task.taskName}
@@ -67,7 +71,7 @@ const TasksPage = () => {
           />
           <input
             type="number"
-            className="border border-1 border-blue-300 rounded-md px-4"
+            className="border border-1 border-blue-300 rounded-md px-4 py-1"
             name="numOfPomodoro"
             placeholder="number of pomodoro"
             value={task.numOfPomodoro}
