@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TaskItem } from "../components";
+import { Alert, TaskItem } from "../components";
 
 const TasksPage = () => {
   const [task, setTask] = useState({ taskName: "", numOfPomodoro: "" });
@@ -31,7 +31,9 @@ const TasksPage = () => {
   return (
     <main className="container mx-auto mt-24">
       <div className="w-1/2 flex flex-col gap-2">
-        <h1 className="font-bold text-center text-3xl">New Task</h1>
+        <h1 className="font-bold text-center text-2xl">New Task</h1>
+
+        <Alert />
         <form action="" onSubmit={handleSubmit} className="flex flex-col gap-3">
           <input
             type="text"
