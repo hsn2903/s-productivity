@@ -1,12 +1,26 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import { Alert, TaskItem } from "../components";
 
-const initialTasks = [
-  { id: 0, taskName: "p: new topic", numOfPomodoro: 4, isDone: true },
-  { id: 1, taskName: "p: project", numOfPomodoro: 4, isDone: false },
-  { id: 2, taskName: "p: repeat", numOfPomodoro: 2, isDone: false },
-];
-let nextId = 3;
+const reducer = (state, action) => {
+  if (action.type === "ADD_TASK") {
+    const newTasks = [...state.tasks, action.payload];
+    return { ...state, tasks: newTasks, showAlert: true };
+  }
+
+  if (action.type === "REMOVE_TASK") {
+    const newTasks = state.tasks.filter((t) => t.id !== action.payload);
+    return { ...state, tasks: newTasks };
+  }
+
+  throw new Error("no matching action type");
+};
+
+const initialArg = {
+  tasks: [],
+  showAlert: false,
+  alertText: "",
+  alertType: "",
+};
 
 const TasksPage = () => {
   const [task, setTask] = useState({
@@ -14,9 +28,8 @@ const TasksPage = () => {
     numOfPomodoro: "",
     isDone: false,
   });
-  const [tasksList, setTasksList] = useState(initialTasks);
 
-  // const [state, dispatch] = useReducer(reducer, initialArg, init?);
+  const [state, dispatch] = useReducer(reducer, initialArg);
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -32,13 +45,15 @@ const TasksPage = () => {
       // show alert
     }
 
-    setTasksList([...tasksList, task]);
+    dispatch({ type: "ADD_TASK", payload: task });
+
     setTask({ taskName: "", numOfPomodoro: "", done: false });
   };
 
   const handleRemove = (id) => {
-    const newTasks = tasksList.filter((t) => t.id !== id);
-    setTasksList(newTasks);
+    // setTasksList(newTasks);
+
+    dispatch({ type: "REMOVE_TASK", payload: id });
   };
 
   return (
@@ -46,7 +61,7 @@ const TasksPage = () => {
       <div className="w-1/2 flex flex-col gap-2">
         <h1 className="font-bold text-center text-2xl">New Task</h1>
 
-        <Alert />
+        {state.showAlert && <Alert />}
         <form action="" onSubmit={handleSubmit} className="flex flex-col gap-3">
           <input
             type="text"
@@ -73,7 +88,7 @@ const TasksPage = () => {
         </form>
 
         <h1 className="text-xl font-bold text-slate-700">Tasks List</h1>
-        {tasksList.map((item) => {
+        {state.tasks.map((item) => {
           const { id, taskName, numOfPomodoro } = item;
           return <TaskItem key={id} {...item} onRemove={handleRemove} />;
         })}
