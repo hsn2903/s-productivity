@@ -1,11 +1,15 @@
-import { Navbar } from "./components";
+import { Navbar, PomodoroTimer } from "./components";
+
 import { TasksPage } from "./pages";
 
 function App() {
   return (
     <div>
       <Navbar />
-      <TasksPage />
+      <div className="flex container mx-auto">
+        <TasksPage />
+        <PomodoroTimer />
+      </div>
     </div>
   );
 }
