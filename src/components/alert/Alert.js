@@ -21,7 +21,7 @@ const Alert = ({ alertType, alertText, clearAlert }) => {
 
       {alertType === "danger" && (
         <div
-          className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+          className="p-4 py-2 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
           role="alert"
         >
           {alertText}
@@ -39,7 +39,7 @@ const Alert = ({ alertType, alertText, clearAlert }) => {
 
       {alertType === "warning" && (
         <div
-          className="p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800"
+          className="p-4 py-2 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800"
           role="alert"
         >
           {alertText}
@@ -48,7 +48,7 @@ const Alert = ({ alertType, alertText, clearAlert }) => {
 
       {alertType === "dark" && (
         <div
-          className="p-4 text-sm text-gray-700 bg-gray-100 rounded-lg dark:bg-gray-700 dark:text-gray-300"
+          className="p-4 py-2 text-sm text-gray-700 bg-gray-100 rounded-lg dark:bg-gray-700 dark:text-gray-300"
           role="alert"
         >
           {alertText}
