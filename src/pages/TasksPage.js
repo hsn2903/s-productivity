@@ -46,6 +46,10 @@ const TasksPage = () => {
     dispatch({ type: "CLEAR_ALERT" });
   };
 
+  const handleClearTasks = () => {
+    dispatch({ type: "CLEAR_TASKS" });
+  };
+
   return (
     <main className="container mx-auto mt-24">
       <div className="w-[350px] flex flex-col gap-2 border border-slate-700 p-6 rounded-md">
@@ -90,6 +94,12 @@ const TasksPage = () => {
           const { id, taskName, numOfPomodoro } = item;
           return <TaskItem key={id} {...item} onRemove={handleRemove} />;
         })}
+        <button
+          className="border border-slate-600 rounded-md px-4 py-1 self-center text-red-700"
+          onClick={handleClearTasks}
+        >
+          clear tasks
+        </button>
       </div>
     </main>
   );

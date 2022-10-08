@@ -25,5 +25,10 @@ export const reducer = (state, action) => {
     return { ...state, showAlert: false };
   }
 
+  if (action.type === "CLEAR_TASKS") {
+    return { ...state, tasks: [] };
+  }
+
+  // if there is no matching action
   throw new Error("no matching action type");
 };
